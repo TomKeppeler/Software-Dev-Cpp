@@ -1,9 +1,6 @@
-
-CPP := clang++
+NAME := surprise
 OPT := -w
-TARGET := suprise.cc
-
-suprise.cc:
-	$(CC) $(TARGET) $(OPT)
+suprise.exe: $(NAME).cc
+	clang++ $(OPT) $(NAME).cc -o $(NAME).exe
 clean:
-	rm $(TARGET)
+	rm $(NAME).exe
