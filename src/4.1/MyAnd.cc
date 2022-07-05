@@ -21,3 +21,8 @@ bool myAndAnd(bool a, bool b){
         return false;
     }
 }
+
+int main()
+{
+    return 0;
+}
