@@ -30,6 +30,9 @@ public:
         if (this->denumerator_ < 0) {
             this->denumerator_*= -1;
         }
+        if (this->denumerator_ == 0){
+            this->denumerator_ = 1;
+        }
     }
 
     Rational(Integer const &numerator) : numerator_(numerator), denumerator_(1)
