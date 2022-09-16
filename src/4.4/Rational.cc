@@ -13,4 +13,6 @@ namespace linalge {
         }
         return gcd(b, a%b);
     }
+
+    
 }
