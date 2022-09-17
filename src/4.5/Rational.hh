@@ -2,9 +2,10 @@
 #define RATIONAL_HH
 #include <iostream>
 #include <ostream>
-
-namespace linalg
-{
+#include <sys/select.h>
+namespace GCD {
+    int gcd(int numerator, int denumerator);
+}
 
 class Rational
 {
@@ -15,7 +16,6 @@ public:
 private:
     Integer numerator_;
     Natural denumerator_;
-    int gcd(int a, int b);
 public:
     Rational();
 
@@ -29,11 +29,11 @@ public:
 
     void print();
 
-    bool operator<(Rational const& r) const;
-    bool operator>(Rational const& r) const;
-    bool operator<=(Rational const& r) const;
-    bool operator>=(Rational const& r) const;
-    bool operator==(Rational const& r) const;
+    const bool operator<(Rational const& r);
+    const bool operator>(Rational const& r);
+    const bool operator<=(Rational const& r);
+    const bool operator>=(Rational const& r);
+    const bool operator==(Rational const& r);
 
     Rational operator-(Rational const& r) const;
     Rational operator+(Rational const& r) const;
@@ -45,11 +45,9 @@ public:
     void operator*=(Rational const& r);
     void operator/=(Rational const& r);
 
-    Rational recip();
+    Rational recip() const;
 
     Rational operator<<(std::istream& input);
     void operator>>(Rational r);
 }; //class Rational
-
-} // namespace linalg
 #endif

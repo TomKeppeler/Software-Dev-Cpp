@@ -1,7 +1,8 @@
 #include "Rational.hh"
 using namespace linalg;
 
-int main(){
+int main()
+{
     Rational r{1,2};
     r.print();
 }
