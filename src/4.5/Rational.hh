@@ -28,6 +28,7 @@ public:
     Natural denom();
 
     void print();
+    Rational add(Rational const &other);
 
     const bool operator<(Rational const& r);
     const bool operator>(Rational const& r);
