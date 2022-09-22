@@ -69,7 +69,3 @@ Complex operator/(const Complex& c1, const Complex& c2) {
 
 	return Complex(real / tmp, imag / tmp);
 }
-
-int main() {
-	return 0;
-}

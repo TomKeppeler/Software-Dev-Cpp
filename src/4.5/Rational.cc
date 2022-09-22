@@ -36,12 +36,12 @@ int GCD::gcd(int numerator, int denumerator)
     return gcd(denumerator, numerator % denumerator);
 }
 
-Rational::Integer Rational::numer()
+Rational::Integer Rational::numer() const
 {
     return this->numerator_;
 }
 
-Rational::Natural Rational::denom()
+Rational::Natural Rational::denom() const
 {
     return this->denumerator_;
 }
@@ -55,6 +55,13 @@ Rational Rational::add(Rational const &other)
 {
     return *this + other;
 }
+
+Rational Rational::recip() const
+{
+    Rational ret{this->denumerator_, this->numerator_};
+    return ret;
+}
+
 const bool Rational::operator<(Rational const &r)
 {
     return (this->numerator_ * r.denumerator_) < (r.numerator_ * this->denumerator_);
@@ -80,27 +87,27 @@ const bool Rational::operator==(const Rational &r)
     return (this->numerator_ * r.denumerator_) == (r.numerator_ * this->denumerator_);
 }
 
-Rational Rational::operator-(Rational const &r) const
+Rational operator-(Rational const& r1, Rational const& r2) 
 {
-    Rational ret{this->numerator_ - r.numerator_, this->denumerator_ - r.denumerator_};
+    Rational ret{r1.numer() - r2.numer(), r1.denom() - r2.denom()};
     return ret;
 }
 
-Rational Rational::operator+(Rational const &r) const
+Rational operator+(Rational const &r1, Rational const& r2) 
 {
-    Rational ret{this->numerator_ + r.numerator_, this->denumerator_ + r.denumerator_};
+    Rational ret{r1.numer() + r2.numer(), r1.denom() + r2.denom()};
     return ret;
 }
 
-Rational Rational::operator*(Rational const &r) const
+Rational operator*(Rational const &r1, Rational const& r2) 
 {
-    Rational ret{this->numerator_ * r.numerator_, this->denumerator_ * r.denumerator_};
+    Rational ret{r1.numer() * r2.numer(), r1.denom() * r2.denom()};
     return ret;
 }
 
-Rational Rational::operator/(Rational const &r) const
+Rational operator/(Rational const &r1, Rational const& r2) 
 {
-    Rational ret{this->numerator_ * r.denumerator_, this->numerator_ * r.denumerator_};
+    Rational ret{r1.numer() * r2.denom(), r1.numer() * r2.denom()};
     return ret;
 }
 
@@ -127,24 +134,21 @@ void Rational::operator/=(Rational const &r)
     this->denumerator_ = this->denumerator_ / r.denumerator_;
 }
 
-
-Rational Rational::recip() const
+std::ostream& operator<<(std::ostream& out, Rational& r)
 {
-    Rational ret{this->denumerator_, this->numerator_};
-    return ret;
+    out << r.denom() + '/' + r.numer();
+    return out;
+    
 }
-Rational Rational::operator<<(std::istream &input)
+
+std::istream& operator>>(std::istream& in, Rational& r)
 {
     Rational::Integer numer;
     char slash;
     Rational::Natural denum;
-    std::cin >> numer;
-    std::cin >> slash;
-    std::cin >> denum;
-    return Rational{numer, denum};
-}
-
-void Rational::operator>>(Rational r)
-{
-    std::cout << r.denom() + '/' + r.numer();
+    in >> numer;
+    in >> slash;
+    in >> denum;
+    r = Rational{numer, denum};
+    return in;
 }

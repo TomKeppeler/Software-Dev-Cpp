@@ -2,7 +2,6 @@
 #define RATIONAL_HH
 #include <iostream>
 #include <ostream>
-#include <sys/select.h>
 namespace GCD {
     int gcd(int numerator, int denumerator);
 }
@@ -23,9 +22,9 @@ public:
 
     Rational(Integer const &numerator);
 
-    Integer numer();
+    Integer numer() const;
     
-    Natural denom();
+    Natural denom() const;
 
     void print();
     Rational add(Rational const &other);
@@ -35,11 +34,6 @@ public:
     const bool operator<=(Rational const& r);
     const bool operator>=(Rational const& r);
     const bool operator==(Rational const& r);
-
-    Rational operator-(Rational const& r) const;
-    Rational operator+(Rational const& r) const;
-    Rational operator*(Rational const& r) const;
-    Rational operator/(Rational const& r) const;
     
     void operator-=(Rational const& r);
     void operator+=(Rational const& r);
@@ -48,7 +42,14 @@ public:
 
     Rational recip() const;
 
-    Rational operator<<(std::istream& input);
-    void operator>>(Rational r);
+
 }; //class Rational
+
+    Rational operator-(Rational const& r1, Rational const& r2);
+    Rational operator+(Rational const& r1, Rational const& r2);
+    Rational operator*(Rational const& r1, Rational const& r2);
+    Rational operator/(Rational const& r1, Rational const& r2);
+
+    std::ostream& operator<<(std::ostream& out, Rational& r);
+    std::istream& operator>>(std::istream&, Rational r);
 #endif
